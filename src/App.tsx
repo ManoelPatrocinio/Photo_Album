@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, useRef } from "react";
 import * as C from "./App.styles";
 import HeaderBackground from "./assets/img/headerImg2.jpg";
 import * as Photos from "./services/photos";
@@ -9,6 +9,10 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [onUploading, setOnUploading] = useState(false);
   const [photos, setPhotos] = useState<Photo[]>([]);
+  const dropDwonRef = useRef(null);
+  const [isActive, setIsActive] = useState(false);
+  const onClick = () => setIsActive(!isActive);
+  console.log(isActive);
 
   useEffect(() => {
     const getPhotos = async () => {
@@ -51,7 +55,18 @@ function App() {
 
       <C.Main>
         <C.Header>
-          <C.HeaderTitle>My Photos album</C.HeaderTitle>
+          <C.HeaderItem>?</C.HeaderItem>
+          <C.HeaderTitle>My album</C.HeaderTitle>
+          <C.HeaderBtnUpContent>
+            <C.UploadForm method="POST" onSubmit={hendleFormSumit}>
+              <div className="wrapperInputs">
+                <span className="label">Add Imagem</span>
+                <input type="file" name="inputImg" id="inputImg" />
+                <input type="submit" value="Enviar" className="btnSumit" />
+              </div>
+              {onUploading && "Enviando..."}
+            </C.UploadForm>
+          </C.HeaderBtnUpContent>
         </C.Header>
         {loading && (
           <C.ScreenLoading>
@@ -73,14 +88,6 @@ function App() {
             <p>Não há fotos cadastradas</p>
           </C.ScreenLoading>
         )}
-        <C.UploadForm method="POST" onSubmit={hendleFormSumit}>
-          <div className="wrapperInputs">
-            <span className="label">Upload File</span>
-            <input type="file" name="inputImg" id="inputImg" />
-            <input type="submit" value="Enviar" className="btnSumit" />
-          </div>
-          {onUploading && "Enviando..."}
-        </C.UploadForm>
       </C.Main>
     </C.Container>
   );

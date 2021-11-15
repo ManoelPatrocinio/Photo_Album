@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const ImgCard = styled.div`
   cursor: pointer;
   position: relative;
+  box-shadow: 1px 4px 6px rgb(11 20 38);
   img {
     width: 100%;
     height: 100%;
