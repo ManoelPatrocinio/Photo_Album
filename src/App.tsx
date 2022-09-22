@@ -9,9 +9,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [onUploading, setOnUploading] = useState(false);
   const [photos, setPhotos] = useState<Photo[]>([]);
-  const dropDwonRef = useRef(null);
+  //const dropDwonRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const onClick = () => setIsActive(!isActive);
+  //const onClick = () => setIsActive(!isActive);
   console.log(isActive);
 
   useEffect(() => {
